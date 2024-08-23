@@ -1,0 +1,95 @@
+THIS IS LECTURE 1 : INCEPTION 
+TOPICS COVERED :
+ hello world in html, js 
+ creating element in react , rendering a root 
+ use of cdn links , nesting in react 
+
+// HTML 
+
+<!-- Just type html5 it autocompletes the basic template -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css" />
+    <title>Sallu</title>
+</head>
+<body>
+        <div id="root"> <h3> Akshay is here </h3></div>
+        <!-- CDN Links (component delivery network) -->
+        <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+
+        <!-- Hello World with React  -->
+        <script src="./App.js"> 
+       
+        </script>
+
+    </body> 
+</html>
+
+/*
+React.create will give you a object with tag, attributes , html piece
+render creates a h1 tag and provide attributes and deliver to root
+*/
+
+const heading = React.createElement("h1",{id : "heading" },"Hello World with React! ");
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(heading);
+
+// Above code generate only one tag h1 
+// But if we need nested loop then what ?
+
+/*
+<div id = "parent">
+    <div id = "child">
+        <h1> I am h1 tag</h1>
+        <h2> I am h2 tag </h2>
+
+        Note : h1 and h2 are siblings 
+        we can create an array for siblings 
+        
+    </div>
+</div>
+*/
+
+
+
+// JAVASCRIPT 
+
+const parent = React.createElement("div", {id : "parent"}, [React.createElement("div", {id : "child"}, 
+    [React.createElement ("h1", {} , " I am h1 tag "), React.createElement ("h2", {} , " I am h2 tag ")]
+ ) ,
+ React.createElement("div", {id : "child2"}, "I am  h3 tag")
+]);
+
+ console.log(parent);
+ const root = ReactDOM.createRoot(document.getElementById("root"));
+ root.render(parent);
+
+/*
+But what if we have more than 1 chils in parent class 
+it will messed up - so many nesting of loops
+here also pass array of children in 3rd argument of parent 
+*/
+
+
+/*
+To Avoid this nesting and blah blah 
+we will use JSX
+
+Bye Bye React.createElement 
+*/
+
+// Note if something is alredy present in root it will replaced when we render root 
+
+
+// CSS 
+
+#parent {
+    color : red;
+}
+

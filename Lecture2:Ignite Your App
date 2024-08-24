@@ -1,0 +1,43 @@
+<!-- 
+
+ NO More CDN Links , import node modules  
+
+       
+<script type="module" src="./App.js">   </script>
+ Above type="" is important otherwise it didnt understand import 
+
+BUNDLERS _ vite, parcel, webpack etc.
+create react app uses wabble as a bundler 
+
+React.createElement("", {These are props, can be anything}, "");
+
+npm, yarn - package managers 
+npm init - will give package.json
+npm install -D parcel  - install parcel as a dev dependency 
+package-lock.json- have exact version in use 
+node module contains all these helper function for parcel 
+
+replace cdn links with 
+npm install react
+npm install react-dom
+
+Host it : 
+npx parcel index.html
+
+Use import React from "react"; import ReactDOM from "react-dom/client";
+ 
+PARCEL WORKING :: 
+creates a server  
+Cleaning our code 
+dev and production build 
+use cache to reduce time 
+compression 
+compatable with older version 
+Image optimisation 
+https on dev machine 
+port number 
+consistent hashing algo 
+zero configuration - dont need anything installed 
+transative dependencies - parcel use x, x use y, y use z etc.
+
+-->

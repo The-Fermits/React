@@ -1,0 +1,147 @@
+Lecture 5 :
+organise files , import export , 
+search function, filter , trigger search button on press enter key , Usestate Hook 
+
+Note : To call function as <func_name /> write first letter of function Capital 
+
+IN SRC :
+1. App.js
+
+import React from "react";
+import ReactDOM from "react-dom";
+//import by name and default , for name use {}
+import Header,{Title} from "./Header";
+import Body from "./Body";
+import Footer from "./Footer";
+
+
+const AppLayout = () => {
+  return (
+   
+    <React.Fragment>
+      <Header />
+      <Body />
+      <Footer/>
+    </React.Fragment>
+  );
+};
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(AppLayout());
+
+
+
+
+2.Body.js
+import { useState } from "react";
+
+import { IMG_CDN_URL } from "./config";
+// // config driven UI
+// const KFC = {
+//   price: 900,
+//   Name: "KFC",
+//   url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUgV4ITetYVZB2Pzbp_3k-feriyr6obtnk0g&s",
+// };
+
+// const pizzaHut = {
+//   price: 600,
+//   Name: "PizzaHut",
+//   url: IMG_CDN_URL,
+// };
+
+const elem = [
+  {
+    price: 600,
+    Name: "PizzaHut",
+    url: IMG_CDN_URL,
+  },
+  {
+    price: 900,
+    Name: "KFC",
+    url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUgV4ITetYVZB2Pzbp_3k-feriyr6obtnk0g&s",
+  },
+  {
+    price: 900,
+    Name: "KFC",
+    url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUgV4ITetYVZB2Pzbp_3k-feriyr6obtnk0g&s",
+  },
+];
+
+const card_show = (props) => {
+  return (
+    <div className="cards_show">
+      <img className="cards-logo" alt="cards-logo" src={props.url} />
+      <h1>{props.Name}</h1>
+      <h2> price : {props.price}$</h2>
+    </div>
+  );
+};
+
+const filterData = (searchTxt, cards) => {
+  return cards.filter((cards) => cards.Name.includes(searchTxt));
+};
+
+const Body = () => {
+  const [searchTxt, setsearchTxt] = useState("");
+  const [cards, setcards] = useState(elem);
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      setsearchTxt(e.target.value);
+      const data = filterData(searchTxt, elem);
+      setcards(data);
+    }
+  };
+
+  return (
+    <>
+      <div className="body">
+        <div className="searchBar">
+          <input
+            type="text"
+            className="searchInput"
+            value={searchTxt}
+            onChange={(e) => {
+              setsearchTxt(e.target.value);
+            }}
+            onKeyDown={handleKeyDown}
+          />
+          <button
+            className="searchButton"
+            onClick={
+              // filter data function using input
+              () => {
+                const data = filterData(searchTxt, elem);
+                setcards(data);
+              }
+            }
+          >
+            Search
+          </button>
+        </div>
+
+        <div className="menuCard">
+          {cards.map((card, index) => card_show(card))}
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Body;
+
+
+
+
+
+3. config.js
+ //kind o fcentral place for things 
+ // Its kind of Constant Files 
+
+ export const IMG_CDN_URL = "https://www.istockphoto.com/photo/pepperoni-pizza-gm187248625-27699016?utm_source=pixabay&utm_medium=affiliate&utm_campaign=SRP_image_sponsored&utm_content=https%3A%2F%2Fpixabay.com%2Fimages%2Fsearch%2Fpizza%2F&utm_term=pizza"
+
+
+
+4. rest all components header,Footer are same as before 
+
+ 

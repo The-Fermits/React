@@ -1,0 +1,144 @@
+Lecture 3 : 
+Functional components , JSX ,Fragment
+// HTML Still same 
+
+import React from "react";
+import ReactDOM from "react-dom";
+
+const Title = () => {
+  return (
+    <img
+      className="logo"
+      alt="logo"
+      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUgV4ITetYVZB2Pzbp_3k-feriyr6obtnk0g&s"
+    />
+  );
+};
+
+const Header = () => {
+  return (
+    <div className="header">
+      {Title()}
+      <div className="nav-items">
+        <ul>
+          <li>Home</li>
+          <li>About</li>
+          <li>Contact</li>
+          <li>Cart</li>
+        </ul>
+      </div>
+    </div>
+  );
+};
+
+// config driven UI
+const KFC = {
+    price : 100 
+    } 
+
+const cards = (props) => {
+  return (
+    <div className="cards">
+      <img
+        className="cards-logo"
+        alt="cards-logo"
+        src=
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUgV4ITetYVZB2Pzbp_3k-feriyr6obtnk0g&s"
+      />
+      <h1>{props}</h1>
+      <h2> price : {props.price}$</h2>
+    </div>
+  );
+};
+
+const Body = () => {
+  return (
+    <>
+      <div className="body">
+        {cards("KFC")}
+        {cards("Pizza hut")}
+        {cards("Momos")}
+      </div>
+    </>
+  );
+};
+const Footer = () => {
+  return <></>;
+};
+
+const AppLayout = () => {
+  return (
+    /*
+         // Haeder 
+              Logo
+              NavItem
+              cart
+              //Body - search, menu -> cards -- price,rating,
+              //Body - search, menu -> cards -- price,rating,
+             
+
+         Footer : 
+            Links 
+            Copyright
+ 
+        */
+    <React.Fragment>
+      <Header />
+      <Body />
+    </React.Fragment>
+  );
+};
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(AppLayout());
+
+// CSS 
+.header{
+    display:  flex ;
+    justify-content: space-between;
+    margin : 10px;
+    border: 1px solid black;
+}
+
+
+.nav-items > ul{
+    list-style-type: none;
+    display : flex ;
+
+}
+
+.nav-items > ul >li {
+    padding : 10px ;
+}
+
+.logo{
+    width: 50px;
+}
+
+
+.cards-logo{
+    width : 50px;
+    margin: 20px;
+}
+
+.cards{
+    width: 150px;
+    margin: 10px;
+    padding: 0 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: white;
+    transition:  transform ease-in-out 0.2s;
+    box-shadow:  inset 10px 10px 10px rgba(128, 128, 128, 0.091),
+    inset -10px -10px 10px rgba(128, 128, 128, 0.144);
+}
+
+.cards:hover{
+    transform: scale(1.02);
+    /* This will bubble up and increse size  */
+}
+.body{
+   display: flex;
+   direction: row ;
+    
+}
